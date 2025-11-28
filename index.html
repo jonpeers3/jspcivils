@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JSP Civil Engineering</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* ==========
+       BASE STYLES
+       ========== */
+    :root {
+      --jsp-black: #0b0b0c;
+      --jsp-grey: #585b5e;
+      --jsp-light-grey: #e5e6e7;
+      --jsp-bg: #f5f5f5;
+      --jsp-accent: #ffc845; /* optional subtle accent */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background: #ffffff;
+      color: var(--jsp-black);
+      line-height: 1.5;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wrapper {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      color: var(--jsp-black);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+      color: var(--jsp-grey);
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      color: var(--jsp-grey);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ==========
+       HEADER
+       ========== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.96);
+      border-bottom: 1px solid #dedede;
+      backdrop-filter: blur(4px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-main {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+    }
+
+    .logo-sub {
+      font-size: 0.78rem;
+      letter-spacing: 0.20em;
+      text-transform: uppercase;
+      color: var(--jsp-grey);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    nav a {
+      padding-bottom: 0.1rem;
+      border-bottom: 2px solid transparent;
+    }
+
+    nav a:hover {
+      border-color: var(--jsp-black);
+    }
+
+    /* ==========
+       HERO
+       ========== */
+    .hero {
+      background: linear-gradient(
+          135deg,
+          #ffffff 0%,
+          var(--jsp-light-grey) 46%,
+          #ffffff 100%
+        );
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: 2.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-size: 1.02rem;
+      color: var(--jsp-grey);
+      max-width: 32rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      border-radius: 999px;
+      border: 1px solid var(--jsp-black);
+      background: var(--jsp-black);
+      color: #ffffff;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+
+    .btn.secondary {
+      background: transparent;
+      color: var(--jsp-black);
+    }
+
+    .btn:hover {
+      background: #000000;
+      color: #ffffff;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: var(--jsp-grey);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+
+    .hero-panel {
+      border-radius: 0.75rem;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      padding: 1.75rem;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.04);
+    }
+
+    .hero-panel h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-panel ul {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--jsp-grey);
+    }
+
+    .hero-panel li + li {
+      margin-top: 0.4rem;
+    }
+
+    /* ==========
+       GRID SECTIONS
+       ========== */
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 0.5rem;
+      border: 1px solid #e0e0e0;
+      padding: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+    }
+
+    .list-plain {
+      list-style: none;
+      font-size: 0.9rem;
+    }
+
+    .list-plain li + li {
+      margin-top: 0.35rem;
+    }
+
+    /* ==========
+       SECTION-SPECIFIC
+       ========== */
+    .section-muted {
+      background: var(--jsp-bg);
+      border-top: 1px solid #e4e4e4;
+      border-bottom: 1px solid #e4e4e4;
+    }
+
+    .why-columns {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .why-item h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .why-item p {
+      font-size: 0.85rem;
+    }
+
+    .projects-placeholder {
+      border-radius: 0.5rem;
+      border: 1px dashed #cccccc;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--jsp-grey);
+    }
+
+    /* ==========
+       CONTACT
+       ========== */
+    .contact-layout {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      align-items: flex-start;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 0.5rem;
+      border: 1px solid #e0e0e0;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .contact-card dt {
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+
+    .contact-card dd {
+      margin-left: 0;
+      color: var(--jsp-grey);
+    }
+
+    .small {
+      font-size: 0.82rem;
+      color: var(--jsp-grey);
+    }
+
+    /* ==========
+       FOOTER
+       ========== */
+    footer {
+      border-top: 1px solid #e0e0e0;
+      padding: 1.5rem 0 2.5rem;
+      font-size: 0.8rem;
+      color: var(--jsp-grey);
+    }
+
+    footer .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    /* ==========
+       RESPONSIVE
+       ========== */
+    @media (max-width: 900px) {
+      .hero-inner,
+      .grid-2,
+      .contact-layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .why-columns {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      nav ul {
+        gap: 0.8rem;
+        font-size: 0.78rem;
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        position: static;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+
+      .hero {
+        padding-top: 2.5rem;
+      }
+
+      .why-columns {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-inner {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <div class="logo-block">
+        <span class="logo-main">JSP</span>
+        <span class="logo-sub">CIVIL ENGINEERING</span>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#sectors">Sectors</a></li>
+          <li><a href="#why">Why Us</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Tender / Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrapper hero-inner">
+      <div>
+        <div class="eyebrow">South Devon • Torbay • Exeter • Plymouth</div>
+        <h1>Precision Groundworks &amp; Civil Infrastructure Specialists</h1>
+        <p class="hero-tagline">
+          Commercial groundworks, drainage, foundations, concrete works and site
+          preparation delivered with reliability, safety and engineering-led accuracy.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn">Request a BOQ Quote</a>
+          <a href="#contact" class="btn secondary">Send Drawings for Pricing</a>
+        </div>
+        <p class="hero-meta">
+          Groundworks • Drainage • Concrete • Small Civils Packages
+        </p>
+      </div>
+
+      <aside class="hero-panel">
+        <h3>Typical Packages</h3>
+        <ul>
+          <li>• Site strip, reduced dig &amp; cart-away</li>
+          <li>• Foundations, slabs &amp; reinforced concrete</li>
+          <li>• Foul &amp; storm drainage, manholes &amp; soakaways</li>
+          <li>• Sub-base &amp; hardstanding for car parks &amp; yards</li>
+          <li>• Small civils packages for commercial builds</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="wrapper">
+      <div class="eyebrow">Services</div>
+      <h2>Groundworks &amp; Civil Engineering Services</h2>
+      <p>
+        JSP Civil Engineering delivers structured groundworks and small-civils packages
+        for commercial clients, developers and contractors across South Devon.
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 2rem;">
+        <div class="card">
+          <h3>Groundworks</h3>
+          <ul class="list-plain">
+            <li>Foundations &amp; footings</li>
+            <li>Strip &amp; raft prep</li>
+            <li>Concrete bases &amp; slabs</li>
+            <li>Reinforced concrete structures</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Drainage &amp; Ducting</h3>
+          <ul class="list-plain">
+            <li>Foul &amp; storm drainage systems</li>
+            <li>Manholes &amp; chambers</li>
+            <li>Soakaways &amp; attenuation</li>
+            <li>Services ducting &amp; connections</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Site Preparation</h3>
+          <ul class="list-plain">
+            <li>Site strip &amp; reduced dig</li>
+            <li>Cart-away &amp; waste management</li>
+            <li>Sub-base &amp; hardstanding prep</li>
+            <li>Kerbs, edgings &amp; externals</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTORS -->
+  <section id="sectors" class="section-muted">
+    <div class="wrapper">
+      <div class="eyebrow">Sectors</div>
+      <h2>Projects &amp; Sectors We Support</h2>
+      <p>
+        We work as a flexible civils partner on small to mid-sized commercial projects,
+        supporting principal contractors, developers and end clients.
+      </p>
+
+      <div class="grid grid-3" style="margin-top: 2rem;">
+        <div class="card">
+          <h3>Commercial &amp; Industrial</h3>
+          <p>
+            Units, workshops, yards, storage compounds and logistics facilities,
+            including foundations, drainage and hardstanding.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Residential &amp; Mixed Use</h3>
+          <p>
+            Small developments, extensions and enabling works for housebuilders and
+            developers requiring structured ground packages.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Public &amp; Infrastructure</h3>
+          <p>
+            Schools, healthcare, public buildings and small infrastructure projects
+            delivered with strong safety and documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why">
+    <div class="wrapper">
+      <div class="eyebrow">Why JSP</div>
+      <h2>Why Contractors Choose JSP Civil Engineering</h2>
+
+      <div class="why-columns" style="margin-top: 2rem;">
+        <div class="why-item">
+          <h3>Reliable Delivery</h3>
+          <p>
+            Consistent performance on programme and on budget, with clear communication
+            from tender through to completion.
+          </p>
+        </div>
+        <div class="why-item">
+          <h3>Commercially Aware</h3>
+          <p>
+            BOQ-based pricing, variations control and professional documentation tailored
+            to QS and project management requirements.
+          </p>
+        </div>
+        <div class="why-item">
+          <h3>Engineering-Led</h3>
+          <p>
+            Accurate levels, sensible methodology and experienced civils background
+            underpin every package we deliver.
+          </p>
+        </div>
+        <div class="why-item">
+          <h3>Flexible Capability</h3>
+          <p>
+            Lean owned plant backed by trusted hire partners for 1.5–14T machinery,
+            enabling the right resource for each project.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section-muted">
+    <div class="wrapper">
+      <div class="eyebrow">Projects</div>
+      <h2>Recent &amp; Representative Projects</h2>
+      <p>
+        As the business grows, this section will showcase case studies with scope,
+        value, duration and outcomes. For now, it serves as a framework ready for
+        your first completed civils packages.
+      </p>
+
+      <div class="projects-placeholder" style="margin-top: 2rem;">
+        <strong>Example layout:</strong><br /><br />
+        <em>Commercial Unit Foundations — Torbay</em><br />
+        Scope: site strip, reduced dig, drainage, foundations, slab prep, concrete pour.<br />
+        Value: £XX,XXX &nbsp;|&nbsp; Duration: X weeks.<br />
+        Outcome: works delivered on programme with zero H&amp;S incidents and full
+        documentation provided to the main contractor.
+      </div>
+    </div>
+  </section>
+
+  <!-- HEALTH & SAFETY -->
+  <section>
+    <div class="wrapper">
+      <div class="eyebrow">Health, Safety &amp; Documentation</div>
+      <h2>Safety, RAMS &amp; Compliance</h2>
+      <p>
+        We operate with a strong safety culture driven by clear method statements,
+        appropriate training and consistent site behaviours.
+      </p>
+
+      <div class="grid grid-2" style="margin-top: 2rem;">
+        <div>
+          <ul class="list-plain">
+            <li>• Project-specific RAMS on every job</li>
+            <li>• Daily plant and equipment checks</li>
+            <li>• CSCS / NPORS-qualified operatives</li>
+            <li>• Toolbox talks and site briefings</li>
+            <li>• Environmental awareness and waste control</li>
+            <li>• Clear communication with site management</li>
+          </ul>
+        </div>
+        <div>
+          <p class="small">
+            Documentation, including RAMS, insurance details, training records and plant
+            inspection templates, can be supplied with tender submissions or prior to
+            commencing works on site.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section-muted">
+    <div class="wrapper contact-layout">
+      <div>
+        <div class="eyebrow">Tender &amp; Contact</div>
+        <h2>Send BOQs, Drawings &amp; Tender Packs</h2>
+        <p>
+          We welcome the opportunity to price structured groundworks and small-civils
+          packages. BOQs, drawings and specifications can be sent directly by email.
+        </p>
+        <p>
+          Typical package values range from small enabling works up to approximately
+          £150k, depending on scope and programme.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <h3>Contact Details</h3>
+        <dl>
+          <dt>Email</dt>
+          <dd>tenders@jspcivils.co.uk</dd>
+
+          <dt>Phone</dt>
+          <dd>+44 (0)7XX XXX XXXX</dd>
+
+          <dt>Areas Covered</dt>
+          <dd>Torbay • South Devon • Exeter • Plymouth</dd>
+
+          <dt>Company</dt>
+          <dd>JSP Civil Engineering Ltd<br />Registered in England &amp; Wales</dd>
+        </dl>
+        <p class="small" style="margin-top: 1rem;">
+          BOQs, drawings and tender documents can be attached to email, or shared via
+          your chosen document portal.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="wrapper footer-inner">
+      <span>© JSP Civil Engineering</span>
+      <span class="small">Groundworks • Drainage • Concrete • Small Civils Packages</span>
+    </div>
+  </footer>
+
+</body>
+</html>
